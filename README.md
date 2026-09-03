@@ -6,13 +6,10 @@ The pipeline parses raw electrode outputs, applies Savitzky-Golay filtering, aut
 
 ## Repository Contents
 
-Universal_Oxygen_Rate_Analysis.ipynb: The primary Jupyter Notebook combining both analysis and overlay functions.
-
-o2_analysis.py: A standalone Python script for full rate extraction and individual multi-panel plotting.
-
-o2_overlay.py: A standalone Python script for rapid visual overlay of multiple traces.
-
-Dummy_CONTROL.csv & Dummy_CONDITION.csv: Anonymised datasets for local testing.
+* Universal_Oxygen_Rate_Analysis.ipynb: The primary Jupyter Notebook combining both analysis and overlay functions.
+* o2_analysis.py: A standalone Python script for full rate extraction and individual multi-panel plotting.
+* o2_overlay.py: A standalone Python script for rapid visual overlay of multiple traces.
+* Dummy_CONTROL.csv & Dummy_CONDITION.csv: Anonymised datasets for local testing.
 
 ## Mandatory Data Structure
 
