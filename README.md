@@ -1,54 +1,40 @@
-Clark Pipeline: Oxygen Evolution Analysis
+# Oxygen Evolution Analysis
 
-A Python-based workflow for processing, smoothing, and analyzing dissolved oxygen kinetic data from Clark-type electrodes.
+This repository provides a downstream analysis pipeline for dissolved oxygen kinetic data obtained from Clark-type electrodes.
 
-This repository provides tools to automatically filter raw electrode noise, detect active phases of photosynthesis and respiration, calculate precise physiological rates, and generate publication-ready figures.
+The pipeline parses raw electrode outputs, applies Savitzky-Golay filtering, automatically detects active metabolic phases, calculates physiological rates via linear regression, and generates overlay visualisations.
 
-🧰 Repository Structure
+## Repository Contents
 
-This repository is split into two primary tools depending on your analytical needs:
+Universal_Oxygen_Rate_Analysis.ipynb: The primary Jupyter Notebook combining both analysis and overlay functions.
 
-Full Analysis Pipeline (o2_analysis.py)
+o2_analysis.py: A standalone Python script for full rate extraction and individual multi-panel plotting.
 
-Designed for rigorous rate extraction.
+o2_overlay.py: A standalone Python script for rapid visual overlay of multiple traces.
 
-Processes raw kinetic traces and applies Savitzky-Golay filtering to calculate continuous instantaneous rates.
+Dummy_CONTROL.csv & Dummy_CONDITION.csv: Anonymised datasets for local testing.
 
-Automatically detects rough metabolic phases based on standard deviation thresholds.
+## Mandatory Data Structure
 
-Isolates the geometric midpoint of these phases and applies a strict 30-second linear regression to calculate highly accurate $\Delta O_2/min$ rates.
+Input data must be standard .csv exports from your electrode software. The script dynamically scans the file to locate the start of the data block, but requires the following exact column headers (case-insensitive):
 
-Exports a detailed .csv table of all calculated rates and a 3-panel .svg summary plot.
+Time
 
-Overlay Visualization (o2_overlay.py)
+Oxygen 1
 
-Designed for rapid visual comparison across multiple biological replicates or conditions.
+## Local Execution
 
-Bypasses the strict regression math to purely focus on smoothing and plotting.
+### 1. Install Dependencies
 
-Generates a clean, 2-panel overlay (Kinetic Trace + Instantaneous Rate) for any number of input files using a colourblind-safe Okabe-Ito palette.
+Install the required libraries via your terminal:
+pip install numpy pandas scipy matplotlib
 
-📊 How It Works (The Math)
+### 2. Run the Code
 
-Clark electrode data is notoriously noisy, making automated linear regressions difficult. This pipeline solves that using the following approach:
+**Option A: Using standard Python**
+Open o2_analysis.py or o2_overlay.py in your preferred IDE, update the input_files list at the very bottom of the script with your file paths, and execute.
 
-Smoothing & Derivation: The raw oxygen concentration (nmol) is passed through a Savitzky-Golay filter (default: polyorder 3). The pipeline simultaneously calculates the first derivative to determine the instantaneous rate of change per second, scaled to per minute.
-
-Phase Detection: A dynamic threshold (4× the standard deviation of the noise) is used to locate active "uphill" (photosynthetic) and "downhill" (respiratory) phases that last for a minimum duration.
-
-Midpoint Regression: To avoid the "lag" often seen at the beginning and end of light/dark transitions, the algorithm finds the exact geometric midpoint of the active phase. It then creates a strict 30-second window around this midpoint and calculates a linear regression (slope) to determine the final physiological rate.
-
-🚀 Usage
-
-Data Requirements
-
-Input data should be standard .csv exports from your electrode software. The script dynamically scans the file for the start of the data block, looking for the column headers Time and Oxygen 1.
-
-Running the Analysis
-
-Simply add your .csv files to the input_files list at the bottom of either script:
-
-input_files = [
-    "Dummy_CONTROL.csv",
-    "Dummy_CONDITION.csv"
-]
+**Option B: Using Jupyter Notebook**
+Launch the notebook environment from your terminal:
+jupyter notebook
+Open Universal_Oxygen_Rate_Analysis.ipynb, modify the input_files list in the execution cell, and run the notebook.
