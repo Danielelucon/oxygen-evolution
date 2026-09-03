@@ -4,6 +4,8 @@ This repository provides a downstream analysis pipeline for dissolved oxygen kin
 
 The pipeline parses raw electrode outputs, applies Savitzky-Golay filtering, automatically detects active metabolic phases, calculates physiological rates via linear regression, and generates overlay visualisations.
 
+Please take note that the "header" function should be modified to suit your instrument output. This one will work for the old Hansatech Clark electrode.
+
 ## Repository Contents
 
 * Universal_Oxygen_Rate_Analysis.ipynb: The primary Jupyter Notebook combining both analysis and overlay functions.
@@ -15,9 +17,8 @@ The pipeline parses raw electrode outputs, applies Savitzky-Golay filtering, aut
 
 Input data must be standard .csv exports from your electrode software. The script dynamically scans the file to locate the start of the data block, but requires the following exact column headers (case-insensitive):
 
-Time
-
-Oxygen 1
+* Time
+* Oxygen 1
 
 ## Local Execution
 
