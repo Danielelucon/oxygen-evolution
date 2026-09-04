@@ -15,7 +15,7 @@ Please take note that the "header" function should be modified to suit your inst
 
 ## Mandatory Data Structure
 
-Input data must be standard .csv exports from your electrode software. The script dynamically scans the file to locate the start of the data block, but requires the following exact column headers (case-insensitive):
+Input data must be standard .csv exports from your electrode software. The script dynamically scans the file to locate the start of the data block, but requires the following exact column headers (case-insensitive, to be modified based on the instrument output):
 
 * Time
 * Oxygen 1
